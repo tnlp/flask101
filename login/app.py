@@ -22,4 +22,4 @@ def signin_from():
     return render_template('from.html',message = '用户名或密码错误',username = username)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=4000,debug=True)
