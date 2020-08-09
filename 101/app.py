@@ -1,4 +1,4 @@
-from flask import Flask,request,redirect,url_for,abort,make_response,json
+from flask import Flask,request,redirect,url_for,abort,make_response,json,render_template
 from flask import jsonify,session
 import os
 app=Flask(__name__)
@@ -85,6 +85,29 @@ def admin():
 def logout():
     if 'logged_in' in session:
         session.pop('logged_in')
-    return redirect(url_for('demo'))    
+    return redirect(url_for('demo'))  
+
+user={
+    'username':'Grey Li',
+    'bio': 'A boy loves movies and music.'
+}
+
+movies = [
+    {'title': 'My Neighbor Totoro', 'year': '1988'},
+    {'title': 'Dead Poets Society', 'year': '1989'},
+    {'title': 'A Perfect World', 'year': '1993'},
+    {'title': 'Leon', 'year': '1994'},
+{'title': 'Mahjong', 'year': '1996'},
+{'title': 'Swallowtail Butterfly', 'year': '1996'}, {'title': 'King of Comedy', 'year': '1999'}, {'title': 'Devils on the Doorstep', 'year': '1999'}, {'title': 'WALL-E', 'year': '2008'},
+{'title': 'The Pork of Music', 'year': '2012'},
+]
+
+@app.route('/watchlist')
+def watchlist():
+    return render_template('watchlist.html',user=user,movies=movies)
+@app.route('/index')
+def index():
+    return render_template('index.html')
+    
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=7000,debug=True)
